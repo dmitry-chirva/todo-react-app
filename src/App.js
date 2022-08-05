@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Header from "./layouts/Header";
+import AddTodos from "./features/add-todos/AddTodos";
+import TodoFilter from "./features/todo-filter/TodoFilter";
+import Footer from "./layouts/Footer";
+import TodoList from "./features/todo-list/TodoList";
 
-function App() {
+function App({ status }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+        <div className="todoapp" data-testid="todoapp">
+          <Header>
+            <AddTodos />
+          </Header>
+          <main className="main">
+              <TodoList status={status} />
+          </main>
+          <TodoFilter />
+        </div>
+        <Footer/>
+      </>
   );
 }
 
