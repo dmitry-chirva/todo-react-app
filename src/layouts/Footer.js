@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function Footer () {
+export default function Footer() {
     return (
-        <footer className="info">
+        <footer className="info" data-testid="footer">
             <p>Double-click to edit a todo</p>
             <p>Created by <a href="http://twitter.com/oscargodson">Oscar Godson</a></p>
             <p>Refactored by <a href="https://github.com/cburgmer">Christoph Burgmer</a></p>

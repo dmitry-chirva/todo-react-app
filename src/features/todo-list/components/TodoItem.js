@@ -1,13 +1,13 @@
-import React, {useEffect, useRef, useState} from "react";
-import {TodoFactoryService} from "../../../services/todo-factory.service";
-import {getClassNames} from "../../../shared/utils/string.utils";
+import React, { useEffect, useRef, useState } from "react";
+import { TodoFactoryService } from "../../../services/todo-factory.service";
+import { getClassNames } from "../../../shared/utils/string.utils";
 import PropTypes from "prop-types";
 
-export default function TodoItem (
+export default function TodoItem(
     {
         value,
-        onChange = () => {},
-        onRemove = () => {}
+        onChange = () => { },
+        onRemove = () => { }
     }
 ) {
     const [item, setItem] = useState(TodoFactoryService.defaultTodo());
@@ -25,8 +25,8 @@ export default function TodoItem (
         }
     }, [value]);
 
-    const toggleCompleteTodo = ({target}) => {
-        const newItem = {...item, isCompleted: target.checked};
+    const toggleCompleteTodo = ({ target }) => {
+        const newItem = { ...item, isCompleted: target.checked };
         setItem(newItem);
         onChange(newItem);
     }
@@ -35,22 +35,22 @@ export default function TodoItem (
         onRemove(item?.id);
     }
 
-    const handleChangeTodo = ({code}) => {
-        if(!code || code && code === 'Enter') {
+    const handleChangeTodo = ({ code }) => {
+        if (!code || code && code === 'Enter') {
             onChange(item);
             disableEditMode();
         }
     }
 
-    const handleUpdateTodoName = ({target}) => {
-        const newItem = {...item, name: target.value};
+    const handleUpdateTodoName = ({ target }) => {
+        const newItem = { ...item, name: target.value };
         setItem(newItem);
     }
 
     const enableEditMode = () => {
         setIsEditingMode(true);
 
-        setTimeout(() =>{
+        setTimeout(() => {
             inputRef.current.focus();
         }, 0)
     }
@@ -66,18 +66,20 @@ export default function TodoItem (
                 data-testid="todo-item">
                 <div className="view">
                     <input className="toggle"
-                           type="checkbox"
-                           checked={item?.isCompleted}
-                           onChange={toggleCompleteTodo} />
-                     <label>{item?.name}</label>
-                     <button className="destroy" onClick={handleRemoveTodo} />
+                        type="checkbox"
+                        data-testid="todo-checkbox"
+                        checked={item?.isCompleted}
+                        onChange={toggleCompleteTodo} />
+                    <label data-testid="todo-label">{item?.name}</label>
+                    <button className="destroy" data-testid="todo-delete" onClick={handleRemoveTodo} />
                 </div>
                 <input ref={inputRef}
-                       className="edit"
-                       value={item?.name}
-                       onChange={handleUpdateTodoName}
-                       onKeyDown={handleChangeTodo}
-                       onBlur={handleChangeTodo}
+                    className="edit"
+                    data-testid="todo-input"
+                    value={item?.name}
+                    onChange={handleUpdateTodoName}
+                    onKeyDown={handleChangeTodo}
+                    onBlur={handleChangeTodo}
 
                 />
             </li>
