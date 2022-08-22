@@ -1,4 +1,4 @@
-import {getUniqId} from "../shared/utils/string.utils";
+import { getUniqId } from "../shared/utils/string.utils";
 
 export class TodoFactoryService {
     static createTodo(name) {
